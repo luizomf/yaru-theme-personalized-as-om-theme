@@ -28,6 +28,12 @@ chmod +x install.sh
 
 Now just answer some questions and you're good to go.
 
+Keep in mind that you may need to restart your system for the theme to be applied. You may also use gnome-tweaks to change settings manually. For this, just run:
+
+```
+sudo apt install gnome-tweaks
+```
+
 # Screenshots
 
 ![Screenshot OmTheme](https://raw.githubusercontent.com/luizomf/yaru-theme-personalized-as-om-theme/master/screenshots/01.png)
