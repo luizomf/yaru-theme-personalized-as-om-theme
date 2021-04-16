@@ -1,0 +1,9 @@
+[X-GNOME-Metatheme]
+Name=OmTheme
+Type=X-GNOME-Metatheme
+Comment=OmTheme - Based on Yaru Theme
+Encoding=UTF-8
+GtkTheme=OmTheme
+IconTheme=OmTheme
+CursorTheme=DMZ-Black
+CursorSize=24
