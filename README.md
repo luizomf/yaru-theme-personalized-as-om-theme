@@ -4,9 +4,24 @@ This is Yaru theme with some customizations. I also used a mix between Yaru Icon
 
 But feel free to make changes as you wish.
 
-To install it, just run:
+To install it, follow the steps bellow:
+
+**Install git**
 
 ```
+sudo apt install git
+```
+
+**Clone this repo**
+
+```
+git clone https://github.com/luizomf/yaru-theme-personalized-as-om-theme.git
+```
+
+**Install**
+
+```
+cd yaru-theme-personalized-as-om-theme/
 chmod +x install.sh
 ./install.sh
 ```

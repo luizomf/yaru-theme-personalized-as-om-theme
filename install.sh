@@ -15,11 +15,19 @@ CYAN='\033[0;36m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-THEME_FILES_PATH="${HOME}/.local/share/themes/OmTheme"
-ICONS_FILES_PATH="${HOME}/.local/share/icons/OmTheme"
+THEMES_DIR="${HOME}/.local/share/themes"
+ICONS_DIR="${HOME}/.local/share/icons"
+
+THEME_FILES_PATH="${THEMES_DIR}/OmTheme"
+ICONS_FILES_PATH="${ICONS_DIR}/OmTheme"
 
 RUID=$(who | awk 'FNR == 1 {print $1}')
 RUSER_UID=$(id -u ${RUID})
+
+if [ -d "$DIR" ]; then
+  # Take action if $DIR exists. #
+  echo "Installing config files in ${DIR}..."
+fi
 
 function printRed() {
   printf "${RED}$1${NC}\n"
