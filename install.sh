@@ -24,10 +24,6 @@ ICONS_FILES_PATH="${ICONS_DIR}/OmTheme"
 RUID=$(who | awk 'FNR == 1 {print $1}')
 RUSER_UID=$(id -u ${RUID})
 
-if [ -d "$DIR" ]; then
-  # Take action if $DIR exists. #
-  echo "Installing config files in ${DIR}..."
-fi
 
 function printRed() {
   printf "${RED}$1${NC}\n"
@@ -200,6 +196,10 @@ else
 fi
 
 if [[ ${copyFiles} == "1" ]]; then
+  if [[ ! -d "$THEMES_DIR" ]]; then
+    mkdir -p $THEMES_DIR
+  fi
+
   cp -R ./OmTheme $THEME_FILES_PATH
   printCyan "\nTheme files copied to ${THEME_FILES_PATH}..."
 fi
@@ -224,6 +224,10 @@ if [[ ${setTheme} == "1" ]]; then
 fi
 
 if [[ ${iconsTheme} == "1" ]]; then
+  if [[ ! -d "$ICONS_DIR" ]]; then
+    mkdir -p $ICONS_DIR
+  fi
+
   cp -R './yaru-blue-with-breeze' $ICONS_FILES_PATH
   printCyan "Icons copied to ${ICONS_FILES_PATH}..."
 fi
@@ -232,3 +236,9 @@ if [[ ${setIcons} == "1" ]]; then
   gsettings set org.gnome.desktop.interface icon-theme "OmTheme"
   printCyan "\nIcons OmTheme is activated..."
 fi
+
+if [[ ${setIcons} == "1" || ${setTheme} == "1" ]]; then
+  dbus-send --type=method_call --print-reply --dest=org.gnome.Shell /org/gnome/Shell org.gnome.Shell.Eval string:'global.reexec_self()';
+  printCyan "\nGnome-shell restarted..."
+fi
+
