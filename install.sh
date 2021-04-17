@@ -303,6 +303,37 @@ if [[ ${setIcons} == "1" ]]; then
   printCyan "\n🔵 Icons OmTheme is activated...\n"
 fi
 
+
+
+
+
+
+
+printf '\n'
+separator
+
+setWallpaper=""
+while [[ $setWallpaper != "1" && $setWallpaper != "2" ]]; do
+  if [[ ${setWallpaper} != "" ]]; then
+    printRed "\n🔴 Please, use the numbers to answer!\n"
+    printCyan "🔵 Let me ask you again..."
+  fi
+
+  printYellow "\n🟡 Do you want me to set an awesome wallpaper?"
+  printGreen "🟢 1) Yes"
+  printGreen "🔴 2) No"
+  read -p "Your turn [1, 2]: " setWallpaper
+done
+
+if [[ ${setIcons} != "1" ]]; then
+  printCyan "\n🔵 Ok, I won't!"
+else
+  wallpaperPath="${HOME}/wallpaper-1.png"
+  cp 'Wallpapers/wallpaper-1.png' $wallpaperPath
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.background picture-uri "file://${wallpaperPath}" 2>/dev/null
+  printCyan "\n🔵 Ok, done..."
+fi
+
 if [[ ${setIcons} == "1" || ${setTheme} == "1" ]]; then
   restartGnome=""
   while [[ $restartGnome != "1" && $restartGnome != "2" ]]; do
