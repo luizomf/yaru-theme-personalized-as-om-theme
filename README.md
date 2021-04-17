@@ -44,6 +44,9 @@ sudo apt install gnome-tweaks
 
 # Screenshots
 
+The wallpaper is included!
+
+![Screenshot OmTheme](https://raw.githubusercontent.com/luizomf/yaru-theme-personalized-as-om-theme/master/screenshots/05.png)
 ![Screenshot OmTheme](https://raw.githubusercontent.com/luizomf/yaru-theme-personalized-as-om-theme/master/screenshots/01.png)
 ![Screenshot OmTheme](https://raw.githubusercontent.com/luizomf/yaru-theme-personalized-as-om-theme/master/screenshots/02.png)
 ![Screenshot OmTheme](https://raw.githubusercontent.com/luizomf/yaru-theme-personalized-as-om-theme/master/screenshots/03.png)
