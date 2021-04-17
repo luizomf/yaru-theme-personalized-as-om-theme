@@ -1,19 +1,10 @@
 #!/bin/bash
-
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 PURPLE='\033[0;35m'
 YELLOW='\033[0;33m'
+WHITE='\033[0;37m'
 NC='\033[0m'
 
 THEMES_DIR="${HOME}/.local/share/themes"
@@ -24,7 +15,6 @@ ICONS_FILES_PATH="${ICONS_DIR}/OmTheme"
 
 RUID=$(who | awk 'FNR == 1 {print $1}')
 RUSER_UID=$(id -u ${RUID})
-
 
 function printRed() {
   printf "${RED}$1${NC}\n"
@@ -46,17 +36,36 @@ function printPurple() {
   printf "${PURPLE}$1${NC}\n"
 }
 
+function printWhite() {
+  printf "${WHITE}$1${NC}\n"
+}
+
 function separator() {
   echo '🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸🔸'
 }
 
-printf '\n\n'
-separator
+printf '\n'
+printWhite $(printf '▚%.0s' {1..80})
+printWhite "\nThis software is just a \"merge\" of files from other softwares."
+printWhite "I just changed some colors in some files."
+printWhite "\nUsed softwares:"
+printWhite "\n- Yaru-Colors - https://www.gnome-look.org/p/1299514/"
+printWhite "- Yaru - https://github.com/ubuntu/yaru"
+printWhite "- KDE / breeze-icons - https://github.com/KDE/breeze-icons"
+printWhite "- Dracula GTK - https://draculatheme.com/gtk"
+printf '\n'
+printWhite $(printf '▚%.0s' {1..80})
+
+printf '\n'
 
 printCyan "\n🔵 Please, answer some questions with numbers, 1, 2, 3... and so on!"
 printCyan "🔵 That way you're going to know exactly what I'm going to do...\n"
 
 separator
+
+###############################################################################
+# Start script
+###############################################################################
 
 installTheme=""
 while [[ $installTheme != "1" && $installTheme != "2" ]]; do
@@ -64,12 +73,12 @@ while [[ $installTheme != "1" && $installTheme != "2" ]]; do
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 Do you want to install OmTheme?\n"
   printGreen "🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " installTheme
-done;
+done
 
 if [[ ${installTheme} != "1" ]]; then
   printCyan "\n🔵 Ok, I won't!"
@@ -89,13 +98,13 @@ while [[ $copyFiles != "1" && $copyFiles != "2" ]]; do
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 I'm going to copy the files to \"${THEME_FILES_PATH}\"."
   printYellow "🟡 Is that ok?\n"
   printGreen "🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " copyFiles
-done;
+done
 
 if [[ ${copyFiles} != "1" ]]; then
   printCyan "\n🔵 Ok, I won't!"
@@ -109,20 +118,19 @@ fi
 printf '\n'
 separator
 
-
 iconsTheme=""
 while [[ $iconsTheme != "1" && $iconsTheme != "2" ]]; do
   if [[ ${iconsTheme} != "" ]]; then
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 Do you want me to copy icon files to \"${ICONS_FILES_PATH}\"."
   printCyan "🔵 The icons are not required, but they are nice!\n"
   printGreen "🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " iconsTheme
-done;
+done
 
 if [[ ${iconsTheme} != "1" ]]; then
   printCyan "\n🔵 Ok, I won't!"
@@ -139,12 +147,12 @@ while [[ $setTheme != "1" && $setTheme != "2" ]]; do
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 Do you want me to apply the theme when I'm done?"
   printGreen "🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " setTheme
-done;
+done
 
 if [[ ${setTheme} != "1" ]]; then
   printCyan "\n🔵 Ok, I won't!"
@@ -161,12 +169,12 @@ while [[ $iconsTheme == "1" && $setIcons != "1" && $setIcons != "2" ]]; do
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 Do you want me to apply the icons theme when I'm done?"
   printGreen "🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " setIcons
-done;
+done
 
 if [[ ${setIcons} != "1" ]]; then
   printCyan "\n🔵 Ok, I won't!"
@@ -183,13 +191,13 @@ while [[ $confirmation != "1" && $confirmation != "2" ]]; do
     printRed "\n🔴 Please, use the numbers to answer!\n"
     printCyan "🔵 Let me ask you again..."
   fi
-  
+
   printYellow "\n🟡 Please, confirm your answers?\n"
 
   if [[ ${installTheme} == "1" ]]; then
     printCyan "🔵 You want me to install OmTheme"
   fi
-  
+
   if [[ ${copyFiles} == "1" ]]; then
     printCyan "🔵 You want me to copy the theme files to ${THEME_FILES_PATH}"
   else
@@ -217,7 +225,7 @@ while [[ $confirmation != "1" && $confirmation != "2" ]]; do
   printGreen "\n🟢 1) Yes"
   printGreen "🔴 2) No"
   read -p "Your turn [1, 2]: " confirmation
-done;
+done
 
 if [[ $confirmation != "1" ]]; then
   printCyan "\n🔵 Ok, you can restart the script and answer again..."
@@ -239,40 +247,39 @@ if [[ ${copyFiles} == "1" ]]; then
   printCyan "\n🔵 Theme files copied to ${THEME_FILES_PATH}..."
 fi
 
-
 if [[ ${setTheme} == "1" ]]; then
   sudo apt update -y
   sudo apt install -y gnome-shell-extensions
   sudo apt install -y gsettings-desktop-schemas
   gnome-extensions enable 'user-theme@gnome-shell-extensions.gcampax.github.com'
 
-  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.interface gtk-theme "OmTheme" 2> /dev/null
-  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.interface cursor-theme "DMZ-Black" 2> /dev/null
-  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.wm.preferences theme "OmTheme" 2> /dev/null
-  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close' 2> /dev/null
-  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.user-theme name "OmTheme" 2> /dev/null
-  
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.interface gtk-theme "OmTheme" 2>/dev/null
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.interface cursor-theme "DMZ-Black" 2>/dev/null
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.wm.preferences theme "OmTheme" 2>/dev/null
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close' 2>/dev/null
+  sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.user-theme name "OmTheme" 2>/dev/null
+
   dashToDock=""
   while [[ $dashToDock != "1" && $dashToDock != "2" ]]; do
     if [[ ${dashToDock} != "" ]]; then
       printRed "\n🔴 Please, use the numbers to answer!\n"
       printCyan "🔵 Let me ask you again..."
     fi
-    
+
     printYellow "\n🟡 Do you want me to set dash-to-dock for you?"
     printGreen "🟢 1) Yes"
     printGreen "🔴 2) No"
     read -p "Your turn [1, 2]: " dashToDock
-  done;
+  done
 
   if [[ ${dashToDock} != "1" ]]; then
     printCyan "\n🔵 Ok, I won't!"
   else
     printCyan "\nOk, it's moving down =)"
-    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true 2> /dev/null
-    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-customize-running-dots true 2> /dev/null
-    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM' 2> /dev/null
-    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false 2> /dev/null
+    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true 2>/dev/null
+    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-customize-running-dots true 2>/dev/null
+    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM' 2>/dev/null
+    sudo -u ${RUID} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false 2>/dev/null
   fi
 
   printCyan "\n🔵 Theme OmTheme is activated...\n"
@@ -303,20 +310,20 @@ if [[ ${setIcons} == "1" || ${setTheme} == "1" ]]; then
       printRed "\n🔴 Please, use the numbers to answer!\n"
       printCyan "🔵 Let me ask you again..."
     fi
-    
+
     printYellow "\n🟡 Sometimes GNOME won't apply themes without restarting,"
     printYellow "🟡 that can be achieved by pressing ALT + F2, typing r and ENTER."
     printYellow "🟡 Do you want me to do that for you?"
     printGreen "🟢 1) Yes"
     printGreen "🔴 2) No"
     read -p "Your turn [1, 2]: " restartGnome
-  done;
+  done
 
   if [[ ${restartGnome} != "1" ]]; then
     printCyan "\n🔵 Ok, I won't!"
   else
     printCyan "\n🔵 Ok, restarting..."
-    dbus-send --type=method_call --print-reply --dest=org.gnome.Shell /org/gnome/Shell org.gnome.Shell.Eval string:'global.reexec_self()';
+    dbus-send --type=method_call --print-reply --dest=org.gnome.Shell /org/gnome/Shell org.gnome.Shell.Eval string:'global.reexec_self()'
     printCyan "\n🔵 Gnome-shell restarted..."
   fi
 fi
@@ -324,9 +331,8 @@ fi
 printf '\n'
 separator
 
-printPurple "\n\n🟣 I believe everything was installed correctly, 🤩 ";
-printPurple "🟣 but I recommend restarting you computer to be sure! 🥳";
+printPurple "\n\n🟣 I believe everything was installed correctly, 🤩 "
+printPurple "🟣 but I recommend restarting you computer to be sure! 🥳"
 
-printPurple "\n\n🟣 Thank you, BYE BYE!!! 👋";
-printPurple "🟣 Author: Otávio Miranda\n\n";
-
+printPurple "\n\n🟣 Thank you, BYE BYE!!! 👋"
+printPurple "🟣 Author: Otávio Miranda\n\n"
