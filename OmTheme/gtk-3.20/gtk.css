@@ -2,7 +2,7 @@
  * Check and Radio buttons *
  ***************************/
 
-* {
+ * {
   padding: 0;
   -gtktoolbutton-icon-spacing: 4;
   -gtktextview-error-underline-color: #c7162b;
@@ -14792,11 +14792,6 @@ headerbar.selection-mode .selection-menu .arrow,
   -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
   color: rgba(255, 255, 255, 0.5);
   -gtk-icon-shadow: none;
-}
-
-viewport.frame,
-viewport.frame row {
-  color: #f7f7f7;
 }
 
 /* GTK NAMED COLORS
